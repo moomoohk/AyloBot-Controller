@@ -9,10 +9,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -27,7 +26,7 @@ public class ControllerFrame extends JFrame
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel contentPane;
-	private final JLabel lblErrors;
+	private final JTextArea txtErrors;
 	private final JButton btnForward, btnBack, btnLeft, btnRight, btnEcho;
 
 	private final Timer errorTimer = new Timer(5000, new ActionListener()
@@ -35,12 +34,13 @@ public class ControllerFrame extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent arg0)
 		{
-			ControllerFrame.this.lblErrors.setText("(Errors will show up here)");
+			ControllerFrame.this.txtErrors.setText("(Errors will show up here)");
 		}
 	});
 
 	public ControllerFrame()
 	{
+		setTitle("JillBot Controller by moomoohk");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(450, 340));
 		setLocationRelativeTo(Controller.loginFrame);
@@ -60,10 +60,13 @@ public class ControllerFrame extends JFrame
 		this.btnRight = new JButton("right");
 		this.btnEcho = new JButton("echo");
 		this.btnBack = new JButton("back");
-		this.lblErrors = new JLabel("(Errors will show up here)");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonPanel, 6, SpringLayout.SOUTH, this.lblErrors);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, this.lblErrors, -238, SpringLayout.SOUTH, this.contentPane);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, this.lblErrors, 5, SpringLayout.NORTH, this.contentPane);
+		this.txtErrors = new JTextArea("(Errors will show up here)");
+		this.txtErrors.setEditable(false);
+		this.txtErrors.setLineWrap(true);
+		this.txtErrors.setWrapStyleWord(true);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonPanel, 6, SpringLayout.SOUTH, this.txtErrors);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, this.txtErrors, -238, SpringLayout.SOUTH, this.contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, this.txtErrors, 5, SpringLayout.NORTH, this.contentPane);
 		buttonPanel.setLayout(new BorderLayout(0, 0));
 		this.contentPane.add(buttonPanel);
 
@@ -99,16 +102,16 @@ public class ControllerFrame extends JFrame
 		this.btnBack.setFont(new Font("PT Sans", Font.BOLD, 16));
 		buttonPanel.add(this.btnBack, BorderLayout.SOUTH);
 
-		sl_contentPane.putConstraint(SpringLayout.NORTH, this.btnForward, 6, SpringLayout.SOUTH, this.lblErrors);
-		this.lblErrors.setBorder(new LineBorder(new Color(0, 0, 0)));
-		this.lblErrors.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblErrors.setForeground(Color.RED);
-		this.lblErrors.setFont(new Font("PT Sans", Font.PLAIN, 13));
-		sl_contentPane.putConstraint(SpringLayout.WEST, this.lblErrors, 10, SpringLayout.WEST, this.contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, this.lblErrors, 430, SpringLayout.WEST, this.contentPane);
-		this.contentPane.add(this.lblErrors);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, this.btnForward, 6, SpringLayout.SOUTH, this.txtErrors);
+		this.txtErrors.setBorder(new LineBorder(new Color(0, 0, 0)));
+		this.txtErrors.setForeground(Color.RED);
+		this.txtErrors.setFont(new Font("PT Sans", Font.PLAIN, 13));
+		sl_contentPane.putConstraint(SpringLayout.WEST, this.txtErrors, 10, SpringLayout.WEST, this.contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, this.txtErrors, 430, SpringLayout.WEST, this.contentPane);
+		this.contentPane.add(this.txtErrors);
 
 		JButton btnQuit = new JButton("Quit");
+		btnQuit.setFont(new Font("PT Sans", Font.PLAIN, 13));
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.NORTH, btnQuit);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnQuit, 271, SpringLayout.NORTH, this.contentPane);
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnQuit, 10, SpringLayout.WEST, this.contentPane);
@@ -151,7 +154,7 @@ public class ControllerFrame extends JFrame
 
 	public void error(String message)
 	{
-		this.lblErrors.setText(message);
+		this.txtErrors.setText(message);
 		this.errorTimer.restart();
 	}
 }

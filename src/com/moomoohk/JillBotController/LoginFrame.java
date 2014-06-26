@@ -46,6 +46,7 @@ public class LoginFrame extends JFrame
 
 	public LoginFrame()
 	{
+		setTitle("JillBot Controller by moomoohk");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(450, 250));
 		setResizable(false);
@@ -94,6 +95,8 @@ public class LoginFrame extends JFrame
 			{
 				if (ke.getKeyCode() == 10)
 					LoginFrame.this.pwdOAuthToken.requestFocus();
+				if (ke.getKeyCode() == 27)
+					LoginFrame.this.txtUsername.setText("");
 			}
 
 			@Override
@@ -127,6 +130,8 @@ public class LoginFrame extends JFrame
 			{
 				if (ke.getKeyCode() == 10)
 					LoginFrame.this.btnSubmit.doClick();
+				if (ke.getKeyCode() == 27)
+					LoginFrame.this.pwdOAuthToken.setText("");
 			}
 
 			@Override
