@@ -42,7 +42,7 @@ public class ControllerFrame extends JFrame
 	public ControllerFrame()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setMinimumSize(new Dimension(450, 300));
+		setMinimumSize(new Dimension(450, 340));
 		setLocationRelativeTo(Controller.loginFrame);
 		setResizable(false);
 		this.contentPane = new JPanel();
