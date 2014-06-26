@@ -13,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 /**
  * 
@@ -25,8 +27,17 @@ public class ControllerFrame extends JFrame
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel contentPane;
-	private final JLabel lblerrorsGoHere;
+	private final JLabel lblErrors;
 	private final JButton btnForward, btnBack, btnLeft, btnRight, btnEcho;
+
+	private final Timer errorTimer = new Timer(5000, new ActionListener()
+	{
+		@Override
+		public void actionPerformed(ActionEvent arg0)
+		{
+			ControllerFrame.this.lblErrors.setText("(Errors will show up here)");
+		}
+	});
 
 	public ControllerFrame()
 	{
@@ -41,16 +52,18 @@ public class ControllerFrame extends JFrame
 		this.contentPane.setLayout(sl_contentPane);
 
 		JPanel buttonPanel = new JPanel();
+		sl_contentPane.putConstraint(SpringLayout.WEST, buttonPanel, 10, SpringLayout.WEST, this.contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this.contentPane);
+		buttonPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		this.btnForward = new JButton("forward");
 		this.btnLeft = new JButton("left");
 		this.btnRight = new JButton("right");
 		this.btnEcho = new JButton("echo");
 		this.btnBack = new JButton("back");
-		this.lblerrorsGoHere = new JLabel("[errors go here]");
-
-		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonPanel, 16, SpringLayout.SOUTH, this.lblerrorsGoHere);
-		sl_contentPane.putConstraint(SpringLayout.WEST, buttonPanel, 0, SpringLayout.WEST, this.lblerrorsGoHere);
-		sl_contentPane.putConstraint(SpringLayout.EAST, buttonPanel, 0, SpringLayout.EAST, this.lblerrorsGoHere);
+		this.lblErrors = new JLabel("(Errors will show up here)");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonPanel, 6, SpringLayout.SOUTH, this.lblErrors);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, this.lblErrors, -238, SpringLayout.SOUTH, this.contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, this.lblErrors, 5, SpringLayout.NORTH, this.contentPane);
 		buttonPanel.setLayout(new BorderLayout(0, 0));
 		this.contentPane.add(buttonPanel);
 
@@ -86,23 +99,21 @@ public class ControllerFrame extends JFrame
 		this.btnBack.setFont(new Font("PT Sans", Font.BOLD, 16));
 		buttonPanel.add(this.btnBack, BorderLayout.SOUTH);
 
-		sl_contentPane.putConstraint(SpringLayout.NORTH, this.btnForward, 6, SpringLayout.SOUTH, this.lblerrorsGoHere);
-		this.lblerrorsGoHere.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblerrorsGoHere.setForeground(Color.RED);
-		this.lblerrorsGoHere.setFont(new Font("PT Sans", Font.PLAIN, 13));
-		sl_contentPane.putConstraint(SpringLayout.NORTH, this.lblerrorsGoHere, 10, SpringLayout.NORTH, this.contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, this.lblerrorsGoHere, 10, SpringLayout.WEST, this.contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, this.lblerrorsGoHere, 32, SpringLayout.NORTH, this.contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, this.lblerrorsGoHere, 430, SpringLayout.WEST, this.contentPane);
-		this.contentPane.add(this.lblerrorsGoHere);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, this.btnForward, 6, SpringLayout.SOUTH, this.lblErrors);
+		this.lblErrors.setBorder(new LineBorder(new Color(0, 0, 0)));
+		this.lblErrors.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblErrors.setForeground(Color.RED);
+		this.lblErrors.setFont(new Font("PT Sans", Font.PLAIN, 13));
+		sl_contentPane.putConstraint(SpringLayout.WEST, this.lblErrors, 10, SpringLayout.WEST, this.contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, this.lblErrors, 430, SpringLayout.WEST, this.contentPane);
+		this.contentPane.add(this.lblErrors);
 
 		JButton btnQuit = new JButton("Quit");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnQuit, 229, SpringLayout.NORTH, this.contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.NORTH, btnQuit);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnQuit, 271, SpringLayout.NORTH, this.contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnQuit, 10, SpringLayout.WEST, this.contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnQuit, -10, SpringLayout.EAST, this.contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnQuit, -10, SpringLayout.SOUTH, this.contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonPanel, -6, SpringLayout.NORTH, btnQuit);
-
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnQuit, 0, SpringLayout.WEST, this.lblerrorsGoHere);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnQuit, 430, SpringLayout.WEST, this.contentPane);
 		this.contentPane.add(btnQuit);
 
 		btnQuit.addActionListener(new ActionListener()
@@ -116,12 +127,18 @@ public class ControllerFrame extends JFrame
 
 		ActionListener btnListener = new ActionListener()
 		{
-
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void actionPerformed(final ActionEvent e)
 			{
-				String command = ((JButton) e.getSource()).getText();
-				Controller.bot.sendIRC().message("#aylojill", command);
+				new Thread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						String command = ((JButton) e.getSource()).getText();
+						Controller.bot.sendIRC().message("#aylojill", command);
+					}
+				}, "Send Command Thread").start();
 			}
 		};
 
@@ -130,5 +147,11 @@ public class ControllerFrame extends JFrame
 		this.btnLeft.addActionListener(btnListener);
 		this.btnRight.addActionListener(btnListener);
 		this.btnEcho.addActionListener(btnListener);
+	}
+
+	public void error(String message)
+	{
+		this.lblErrors.setText(message);
+		this.errorTimer.restart();
 	}
 }

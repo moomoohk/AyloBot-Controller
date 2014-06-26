@@ -7,6 +7,7 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
 import org.pircbotx.hooks.events.DisconnectEvent;
 import org.pircbotx.hooks.events.NoticeEvent;
+import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 import com.moomoohk.JillBotController.LoginFrame.LoginState;
 
@@ -60,7 +61,7 @@ public class Controller extends ListenerAdapter<PircBotX>
 	{
 		if (ne.getNotice().equals("Login unsuccessful"))
 		{
-			bot.stopBotReconnect();
+			bot.sendIRC().quitServer();
 			loginFrame.setState(LoginState.LOGIN_FAIL);
 		}
 	}
@@ -76,7 +77,16 @@ public class Controller extends ListenerAdapter<PircBotX>
 	@Override
 	public void onDisconnect(DisconnectEvent<PircBotX> de)
 	{
+		bot.sendIRC().quitServer();
 		bot.stopBotReconnect();
 		loginFrame.setState(LoginState.LOGIN_FAIL);
+	}
+
+	@Override
+	public void onPrivateMessage(PrivateMessageEvent<PircBotX> pme)
+	{
+		System.out.println(pme.getUser().getNick() + " " + pme.getMessage());
+		if (pme.getUser().getNick().equals("jtv"))
+			controllerFrame.error(pme.getMessage());
 	}
 }
