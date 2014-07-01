@@ -7,6 +7,8 @@ Control ayloJill's Twitch Bot!
 
 (Requires Java 1.6)
 
+[ayloJill's Twitch channel](https://github.com/moomoohk/JillBot-Controller/blob/master/README.md) (where you can see the bot!)
+
 Privacy
 =======
 
