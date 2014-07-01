@@ -12,7 +12,7 @@ Control ayloJill's Twitch Bot!
 Privacy
 =======
 
-You don't have to worry about entering you Twitch OAuth token, it's saved nowhere in the code or on your computer. 
+Your Twitch OAuth token is not saved or used anywhere besides sending it to Twitch for authentication. 
 
 Screenies
 =========
