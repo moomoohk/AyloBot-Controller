@@ -17,6 +17,8 @@ import javax.swing.Timer;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
+import com.moomoohk.Mootilities.OSUtils.OSUtils.OS;
+
 /**
  * 
  * @author Meshulam Silk (moomoohk@ymail.com)
@@ -98,7 +100,7 @@ public class ControllerFrame extends JFrame
 		sl_contentPane.putConstraint(SpringLayout.WEST, this.btnForward, 149, SpringLayout.WEST, this.contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, this.btnForward, 121, SpringLayout.NORTH, this.contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, this.btnForward, -148, SpringLayout.EAST, this.contentPane);
-		this.btnForward.setFont(new Font("PT Sans", Font.BOLD, 16));
+		this.btnForward.setFont(new Font(Controller.os == OS.MACOSX ? "PT Sans" : "Calibri", Font.BOLD, 16));
 		buttonPanel.add(this.btnForward);
 		this.btnRight = new JButton("right");
 
@@ -117,26 +119,26 @@ public class ControllerFrame extends JFrame
 		sl_contentPane.putConstraint(SpringLayout.WEST, this.btnLeft, 10, SpringLayout.WEST, this.contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, this.btnLeft, -51, SpringLayout.SOUTH, this.contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, this.btnLeft, -334, SpringLayout.EAST, this.contentPane);
-		this.btnLeft.setFont(new Font("PT Sans", Font.BOLD, 16));
+		this.btnLeft.setFont(new Font(Controller.os == OS.MACOSX ? "PT Sans" : "Calibri", Font.BOLD, 16));
 		buttonPanel.add(this.btnLeft);
 		sl_contentPane.putConstraint(SpringLayout.WEST, this.btnEcho, 112, SpringLayout.WEST, this.contentPane);
-		this.btnEcho.setFont(new Font("PT Sans", Font.BOLD, 16));
+		this.btnEcho.setFont(new Font(Controller.os == OS.MACOSX ? "PT Sans" : "Calibri", Font.BOLD, 16));
 		sl_contentPane.putConstraint(SpringLayout.EAST, this.btnEcho, 149, SpringLayout.EAST, this.btnLeft);
 		buttonPanel.add(this.btnEcho);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, this.btnRight, -74, SpringLayout.SOUTH, this.contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, this.btnRight, -47, SpringLayout.EAST, this.contentPane);
-		this.btnRight.setFont(new Font("PT Sans", Font.BOLD, 16));
+		this.btnRight.setFont(new Font(Controller.os == OS.MACOSX ? "PT Sans" : "Calibri", Font.BOLD, 16));
 		buttonPanel.add(this.btnRight);
 		sl_contentPane.putConstraint(SpringLayout.WEST, this.btnRight, 21, SpringLayout.EAST, this.btnEcho);
 		this.btnRight.addActionListener(btnListener);
 		this.txtErrors.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		this.txtErrors.setForeground(Color.RED);
-		this.txtErrors.setFont(new Font("PT Sans", Font.PLAIN, 13));
+		this.txtErrors.setFont(new Font(Controller.os == OS.MACOSX ? "PT Sans" : "Calibri", Font.PLAIN, 13));
 		this.contentPane.add(this.txtErrors);
 
 		JButton btnQuit = new JButton("Quit");
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.NORTH, btnQuit);
-		btnQuit.setFont(new Font("PT Sans", Font.PLAIN, 13));
+		btnQuit.setFont(new Font(Controller.os == OS.MACOSX ? "PT Sans" : "Calibri", Font.PLAIN, 13));
 
 		this.label_2 = new JLabel("");
 		buttonPanel.add(this.label_2);
@@ -145,7 +147,7 @@ public class ControllerFrame extends JFrame
 		sl_contentPane.putConstraint(SpringLayout.NORTH, this.btnBack, 212, SpringLayout.NORTH, this.contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, this.btnEcho, -6, SpringLayout.NORTH, this.btnBack);
 		sl_contentPane.putConstraint(SpringLayout.WEST, this.btnBack, 28, SpringLayout.EAST, this.btnLeft);
-		this.btnBack.setFont(new Font("PT Sans", Font.BOLD, 16));
+		this.btnBack.setFont(new Font(Controller.os == OS.MACOSX ? "PT Sans" : "Calibri", Font.BOLD, 16));
 		buttonPanel.add(this.btnBack);
 		this.btnBack.addActionListener(btnListener);
 

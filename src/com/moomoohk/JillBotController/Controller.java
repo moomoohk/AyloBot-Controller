@@ -10,6 +10,8 @@ import org.pircbotx.hooks.events.NoticeEvent;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 import com.moomoohk.JillBotController.LoginFrame.LoginState;
+import com.moomoohk.Mootilities.OSUtils.OSUtils;
+import com.moomoohk.Mootilities.OSUtils.OSUtils.OS;
 
 /**
  * 
@@ -24,6 +26,8 @@ public class Controller extends ListenerAdapter<PircBotX>
 	public static PircBotX bot;
 
 	public String username;
+
+	public static OS os = OSUtils.getCurrentOS();
 
 	public void connect(String network, String room, String username, char[] password)
 	{
