@@ -9,6 +9,8 @@ Control ayloJill's Twitch Bot!
 
 [ayloJill's Twitch channel](https://github.com/moomoohk/JillBot-Controller/blob/master/README.md) (where you can see the bot!)
 
+If you see me on the stream be sure to tell me what you think! All feedback is appreciated.
+
 Privacy
 =======
 
