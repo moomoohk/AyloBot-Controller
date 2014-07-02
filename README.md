@@ -3,6 +3,8 @@ JillBot-Controller
 
 Control ayloJill's Twitch Bot!
 
+This app gives you the ability to use buttons to control the bot so you don't have to type them out over and over again. Great if you are lazy/most fingers are broken.
+
 [Download](https://github.com/moomoohk/JillBot-Controller/releases/latest)
 
 (Requires Java 1.6)
