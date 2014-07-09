@@ -1,4 +1,4 @@
-package com.moomoohk.JillBotController;
+package com.moomoohk.AyloBotController;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -47,7 +47,7 @@ public class LoginFrame extends JFrame
 
 	public LoginFrame()
 	{
-		setTitle("JillBot Controller by moomoohk");
+		setTitle("AyloBot Controller by moomoohk");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(450, 250));
 		setResizable(false);
@@ -202,7 +202,7 @@ public class LoginFrame extends JFrame
 					@Override
 					public void run()
 					{
-						Controller.controller.connect("irc.twitch.tv", "#aylojill", LoginFrame.this.txtUsername.getText(), LoginFrame.this.pwdOAuthToken.getPassword());
+						Controller.controller.connect("irc.twitch.tv", "#aylobot", LoginFrame.this.txtUsername.getText(), LoginFrame.this.pwdOAuthToken.getPassword());
 					}
 				}, "Connect Thread").start();
 			}

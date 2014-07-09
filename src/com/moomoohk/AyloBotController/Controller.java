@@ -1,4 +1,4 @@
-package com.moomoohk.JillBotController;
+package com.moomoohk.AyloBotController;
 
 import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
@@ -9,7 +9,7 @@ import org.pircbotx.hooks.events.DisconnectEvent;
 import org.pircbotx.hooks.events.NoticeEvent;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
-import com.moomoohk.JillBotController.LoginFrame.LoginState;
+import com.moomoohk.AyloBotController.LoginFrame.LoginState;
 import com.moomoohk.Mootilities.OSUtils.OSUtils;
 import com.moomoohk.Mootilities.OSUtils.OSUtils.OS;
 
@@ -33,7 +33,7 @@ public class Controller extends ListenerAdapter<PircBotX>
 	{
 		this.username = username;
 		System.out.println("Connecting...");
-		bot = new PircBotX(new Builder<PircBotX>().setName(username).addListener(controller).setServerHostname("irc.twitch.tv").addAutoJoinChannel("#aylojill").setServerPassword(new String(password)).buildConfiguration());
+		bot = new PircBotX(new Builder<PircBotX>().setName(username).addListener(controller).setServerHostname("irc.twitch.tv").addAutoJoinChannel("#aylobot").setServerPassword(new String(password)).buildConfiguration());
 		try
 		{
 			bot.startBot();

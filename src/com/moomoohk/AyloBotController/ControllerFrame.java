@@ -1,4 +1,4 @@
-package com.moomoohk.JillBotController;
+package com.moomoohk.AyloBotController;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -47,7 +47,7 @@ public class ControllerFrame extends JFrame
 
 	public ControllerFrame()
 	{
-		setTitle("JillBot Controller by moomoohk");
+		setTitle("AyloBot Controller by moomoohk");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(350, 340));
 		setLocationRelativeTo(Controller.loginFrame);
@@ -69,7 +69,7 @@ public class ControllerFrame extends JFrame
 					public void run()
 					{
 						String command = ((JButton) e.getSource()).getText();
-						Controller.bot.sendIRC().message("#aylojill", command);
+						Controller.bot.sendIRC().message("#aylobot", command);
 					}
 				}, "Send Command Thread").start();
 			}
