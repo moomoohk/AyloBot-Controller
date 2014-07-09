@@ -5,6 +5,8 @@ Control AyloJill's Twitch Bot!
 
 This app gives you the ability to use buttons to control the bot so you don't have to type them out over and over again. Great if you are lazy/most fingers are broken.
 
+Twitch limits how often you can send commands. The controller will reflect these limitations by disabling buttons. If you're an admin on the channel these limitations don't apply to you. The "Admin mode" checkbox will disable the button disabling functionality.
+
 [Download](https://github.com/moomoohk/AyloBot-Controller/releases/latest)
 
 (Requires Java 1.6)
